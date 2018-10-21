@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title of the document</title>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+  <p>Reverse this message</p>
+  <p>{{ myMessage }}</p>
+  <button v-on:click="reverseIt">Reverse the Text!</button>
+  <hr>
+  <p>Set this message to whatever you'd like</p>
+  <p>{{ whatYouSay }}</p>
+  <input v-model="whatYouSay">
+</div>
+</body>
+
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+	myMessage: "Sit On A Potato Pan Otis",
+	whatYouSay: "You can change this message really easily yo!"
+  },
+  methods: {
+	reverseIt: function () {
+		this.myMessage = this.myMessage.split('').reverse().join('')
+	}
+  }
+})
+</script>
+
+</html>

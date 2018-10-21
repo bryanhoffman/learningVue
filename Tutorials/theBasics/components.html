@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title of the document</title>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+  {{ message }}
+  <ol>
+	<todo-item
+		v-for="item in groceryList"
+		v-bind:todo="item"
+		v-bind:key="item.id">
+	</todo-item>
+  </ol>
+</div>
+</body>
+
+<script>
+Vue.component('todo-item', {
+	props: ['todo'],
+	template: '<li>{{ todo.text }}</li>'
+})
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello, this is my grocery list:',
+	groceryList: [
+		{ id: 0, text: 'Melatonin'},
+		{ id: 1, text: '12 million potatoes'},
+		{ id: 2, text: 'A deeper sense of purpose'}
+	]
+  }
+})
+</script>
+
+</html>
