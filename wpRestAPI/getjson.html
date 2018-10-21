@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Using WP Rest API</title>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.14.0/axios.min.js"</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"</script>
+</head>
+
+<body>
+<div id="app">
+
+  <button @click="loadPosts" class="button is-primary">Load Posts</button>
+
+  <section class="section">
+    <p v-if="loading">Loading...</p>
+
+    <ul>
+      <li v-for="post in posts">{{ post.title.rendered }}</li>
+    </ul>
+  </section>
+</div>
+</body>
+
+<script>
+var data = {
+  posts: []
+};
+
+const app = new Vue({
+  el: '#app',
+  data: {
+    dataSet: '',
+    loading: '',
+    posts: []
+  },
+  mounted: function() {
+    this.dataSet = 'data';
+    this.posts = data.posts;
+  },
+  methods: {
+    loadPosts: function() {
+      app.dataSet = 'data2';
+      app.loading = true;
+      axios.get('https://bryanhoffman.xyz/wp-json/wp/v2/posts')
+        .then(function(response) {
+          app.posts = response.data;
+          app.loading = false;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  }
+});
+</script>
+
+</html>
